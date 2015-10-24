@@ -15,24 +15,15 @@ namespace UBC.DivvyAPI
 
         public static async Task<DivvyStations> GetStationsAsync()
         {
-            var divvyStations = new DivvyStations();
-
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Accept.Clear();
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var response = await httpClient.GetAsync(DIVVYSTATIONENDPOINT);
-                if(response.IsSuccessStatusCode)
-                {
-                    divvyStations = JsonConvert.DeserializeObject<DivvyStations>(await response.Content.ReadAsStringAsync());
-                }
-            }
-
-            return divvyStations;
+            return await GetStationsTask();
         }
 
         public static DivvyStations GetStations()
+        {
+            return GetStationsTask().Result;
+        }
+
+        private static async Task<DivvyStations> GetStationsTask()
         {
             var divvyStations = new DivvyStations();
 
@@ -41,10 +32,10 @@ namespace UBC.DivvyAPI
                 httpClient.DefaultRequestHeaders.Accept.Clear();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = httpClient.GetAsync(DIVVYSTATIONENDPOINT).Result;
+                var response = await httpClient.GetAsync(DIVVYSTATIONENDPOINT);
                 if (response.IsSuccessStatusCode)
                 {
-                    divvyStations = JsonConvert.DeserializeObject<DivvyStations>(response.Content.ReadAsStringAsync().Result);
+                    divvyStations = JsonConvert.DeserializeObject<DivvyStations>(await response.Content.ReadAsStringAsync());
                 }
             }
 
