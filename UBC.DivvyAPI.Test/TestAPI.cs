@@ -10,7 +10,7 @@ namespace UBC.DivvyAPI.Test
         [TestMethod]
         public void TestAsyncAPI()
         {
-            var stations = DivvyAPI.GetStationsAsync().Result;
+            var stations = DivvyAPI.GetStationsAsync().Result;            
 
             Assert.IsNotNull(stations);            
         }
@@ -21,6 +21,15 @@ namespace UBC.DivvyAPI.Test
             var stations = DivvyAPI.GetStations();
 
             Assert.IsNotNull(stations);
+        }
+
+        [TestMethod]
+        public void TestClosestStations()
+        {
+            var stations = DivvyAPI.GetClosestStations(5, 41.787806, -87.601247).Result;
+
+            Assert.IsNotNull(stations);
+            Assert.IsTrue(stations.Count == 5);
         }
     }
 }

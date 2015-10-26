@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,7 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DivvyAPI.cs" />
-    <Compile Include="DivvyStations.cs" />
+    <Compile Include="Models\DivvyStations.cs" />
+    <Compile Include="Models\Station.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
